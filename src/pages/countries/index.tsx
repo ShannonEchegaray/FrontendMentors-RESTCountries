@@ -1,5 +1,5 @@
 import { GetServerSideProps, GetStaticProps } from "next";
-import type { Welcome, Country } from "./interfaces";
+import type { Welcome, Country } from "../../types/interfaces";
 import { adaptCountries } from "@/utils/commons";
 import SearchBar from "@/components/search-bar/search-bar";
 import dynamic from "next/dynamic";

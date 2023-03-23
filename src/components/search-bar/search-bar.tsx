@@ -27,10 +27,10 @@ export default function SearchBar() {
 
   return (
     <form
-      className="m-auto w-11/12 flex justify-between align-middle"
+      className="m-auto w-11/12 flex flex-col justify-between align-middle md:flex-row md:items-center"
       onSubmit={handleSubmit}
     >
-      <div className="w-1/4 flex align-middle justify-around rounded-lg shadow-sm shadow-black overflow-hidden">
+      <div className="w-fit md:w-1/4 my-4 flex align-middle justify-around rounded-lg shadow-sm shadow-black overflow-hidden">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -52,7 +52,7 @@ export default function SearchBar() {
       <select
         onChange={handleSelect}
         placeholder="Filter by region"
-        className="w-[260px] px-2 outline-none rounded-lg shadow-md dark:bg-slate-700 dark:text-white font-semibold text-black"
+        className="w-[260px] h-[55px] px-2 outline-none rounded-lg shadow-md dark:bg-slate-700 dark:text-white font-semibold text-black"
         name=""
         id=""
       >

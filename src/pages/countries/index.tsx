@@ -16,7 +16,6 @@ interface ICountries {
 }
 
 export default function Countries({ countries }: ICountries) {
-  console.log(countries);
   return (
     <div className="m-auto max-w-[1440px] py-5">
       <SearchBar />

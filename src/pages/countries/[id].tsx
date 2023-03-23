@@ -2,7 +2,7 @@ import { adaptCountries } from "@/utils/commons";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import { Country, Welcome } from "./interfaces";
+import { Country, Welcome } from "../../types/interfaces";
 import Tag from "@/components/tag/tag";
 import { NextRouter } from "next/router";
 
@@ -42,8 +42,8 @@ export default function CountryDetail({ country }: ICountryDetail) {
         </svg>
         <span>Back</span>
       </button>
-      <section className="flex flex-nowrap justify-center">
-        <div className="w-1/2 max-w-[600px] flex items-center">
+      <section className="flex flex-wrap justify-center">
+        <div className="w-fit max-w-[600px] flex items-center">
           <div className="w-full shadow-md dark:shadow-slate-900 rounded-xl overflow-hidden">
             <img
               src={country.flag.png}
@@ -52,8 +52,10 @@ export default function CountryDetail({ country }: ICountryDetail) {
             />
           </div>
         </div>
-        <div className="flex-grow flex flex-col p-10 px-20 justify-between">
-          <div><h1 className="">{country.name}</h1></div>
+        <div className="flex-grow flex flex-col md:p-10 md:px-20 py-10 justify-between">
+          <div>
+            <h1 className="">{country.name}</h1>
+          </div>
           <div className="flex py-10">
             <div className="w-1/2">
               <p>

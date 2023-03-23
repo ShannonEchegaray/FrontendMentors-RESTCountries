@@ -1,4 +1,4 @@
-import { Welcome, Country } from "@/pages/countries/interfaces"
+import { Welcome, Country } from "@/types/interfaces"
 
 const adapt = (country: Welcome): Country => {
     return {

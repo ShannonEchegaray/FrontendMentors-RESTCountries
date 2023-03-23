@@ -10,7 +10,7 @@ export default function CountryCard({ country }: ICountry) {
   return (
     <Link
       href={`/countries/${country.name}`}
-      className="w-[calc(25%-5rem)] min-w-[200px] min-h-[16rem]  rounded-lg justify-between align-middle"
+      className="w-full min-h-[16rem]  rounded-lg justify-between align-middle"
     >
       <div className="flex flex-col shadow-md shadow-slate-900 overflow-hidden rounded-lg ">
         <div className="w-full h-32 border-b-2 overflow-hidden">

@@ -19,7 +19,7 @@ export default function Countries({ countries }: ICountries) {
   return (
     <div className="m-auto max-w-[1440px] py-5">
       <SearchBar />
-      <div className="p-5 flex flex-wrap justify-center gap-20">
+      <div className="p-5 layout-countries gap-20">
         {countries.map((el) => (
           <CountryCard key={el.officialName} country={el}></CountryCard>
         ))}

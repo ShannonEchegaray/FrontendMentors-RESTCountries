@@ -22,6 +22,7 @@ export default function Countries({ countries }: ICountries) {
       <Head>
         <meta name="description" content="All the countries of the world! Come to see." />
         <title>RestCountries - Home</title>
+        <link rel="icon" href="/flag-icon.png"></link>
       </Head>
       <div className="m-auto max-w-[1440px] py-5">
         <SearchBar />

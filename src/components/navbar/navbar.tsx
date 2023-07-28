@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <nav className="w-full p-4 flex justify-between items-center border-b-2">
-      <h1><Link href="/countries" className="ml-4">RESTCountries</Link></h1>
+      <h1><Link href="/" className="ml-4">RESTCountries</Link></h1>
       <div className="mr-4">
         <button className="flex items-center p-1 rounded-md" onClick={handlerTheme}>
           {theme 

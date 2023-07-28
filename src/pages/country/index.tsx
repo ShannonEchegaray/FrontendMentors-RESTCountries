@@ -25,6 +25,7 @@ export default function CountryDetail({ country }: ICountryDetail) {
       <Head>
         <title>RestCountries - {country.name}</title>
         <meta name="description" content={`Let's give a look to ${country.name}.`} />
+        <link rel="icon" href={country.flag.png}></link>
       </Head>
       <div className="max-w-[1220px] m-auto p-8 flex flex-col gap-10">
         <button

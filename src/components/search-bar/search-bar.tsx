@@ -22,7 +22,7 @@ export default function SearchBar() {
     if (search.length > 0) URLParams.set("search", search);
     if (filter.length > 0) URLParams.set("filter", filter);
 
-    router.push("/countries?" + URLParams.toString());
+    router.push("/?" + URLParams.toString());
   }
 
   return (

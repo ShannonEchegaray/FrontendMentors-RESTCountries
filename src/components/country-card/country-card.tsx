@@ -9,7 +9,7 @@ interface ICountry {
 export default function CountryCard({ country }: ICountry) {
   return (
     <Link
-      href={`/countries/${country.name}`}
+      href={`/${country.name}`}
       className="w-full min-h-[16rem]  rounded-lg justify-between align-middle"
     >
       <div className="flex flex-col shadow-md shadow-slate-900 overflow-hidden rounded-lg ">

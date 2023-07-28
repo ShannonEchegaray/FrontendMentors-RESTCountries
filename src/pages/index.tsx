@@ -1,10 +1,16 @@
 import { GetServerSideProps, GetStaticProps } from "next";
-import type { InitFetch, Country } from "../types/interfaces";
-import { adaptCountries } from "@/utils/commons";
-import SearchBar from "@/components/search-bar/search-bar";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+
+// INTERFACES
+import type { InitFetch } from "../types/interfaces";
+
+// COMPONENTS
+import SearchBar from "@/components/search-bar/search-bar";
+
+// HOOKS
 import useCountry from "@/hooks/useCountry";
+
 const CountryCard = dynamic(
   () => import("@/components/country-card/country-card"),
   {

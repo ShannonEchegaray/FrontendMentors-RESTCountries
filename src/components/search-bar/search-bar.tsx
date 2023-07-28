@@ -1,6 +1,10 @@
-import { SearchOptions } from "@/hooks/useCountry";
-import { useRouter } from "next/router";
 import { ChangeEvent, useState, useEffect } from "react";
+import { useRouter } from "next/router";
+
+// INTERFACES
+import type { SearchOptions } from "@/hooks/useCountry";
+
+// OPTIONS
 import options from "./options";
 
 interface SearchBarProps {

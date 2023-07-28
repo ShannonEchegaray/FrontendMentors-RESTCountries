@@ -1,11 +1,18 @@
-import { adaptCountries } from "@/utils/commons";
+import React from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import React from "react";
-import { Country, Welcome } from "../../types/interfaces";
-import Tag from "@/components/tag/tag";
 import { NextRouter } from "next/router";
 import Head from "next/head";
+
+// COMMONS
+import { adaptCountries } from "@/utils/commons";
+
+// INTERFACES
+import type { Country, InitFetch } from "../../types/interfaces";
+
+// COMPONENTS
+import Tag from "@/components/tag/tag";
+
 
 interface ICountryDetail {
   country: Country | null;
@@ -120,7 +127,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       ? `https://restcountries.com/v3.1/alpha/${code}`
       : `https://restcountries.com/v3.1/name/${name}`
 
-    const countries: Welcome[] = await (
+    const countries: InitFetch[] = await (
       await fetch(url)
     ).json();
 

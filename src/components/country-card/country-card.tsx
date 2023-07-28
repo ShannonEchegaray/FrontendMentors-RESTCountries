@@ -1,6 +1,7 @@
-import type { Country } from "@/types/interfaces";
-import Image from "next/image";
 import Link from "next/link";
+
+// INTERFACES
+import type { Country } from "@/types/interfaces";
 
 interface ICountry {
   country: Country;

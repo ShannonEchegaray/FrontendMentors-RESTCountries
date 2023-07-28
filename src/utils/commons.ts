@@ -1,4 +1,4 @@
-import { InitFetch, Country } from "@/types/interfaces"
+import type { InitFetch, Country } from "@/types/interfaces"
 
 const adapt = (country: InitFetch): Country => {
     return {

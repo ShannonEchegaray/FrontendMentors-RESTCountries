@@ -1,6 +1,10 @@
-import { Country, InitFetch } from "@/types/interfaces";
-import { adaptCountries } from "@/utils/commons";
 import { useEffect, useState } from "react";
+
+// COMMONS
+import { adaptCountries } from "@/utils/commons";
+
+// INTERFACES
+import type { Country, InitFetch } from "@/types/interfaces";
 
 interface ReturnUseCountry {
     numberOfPages: number;

@@ -1,6 +1,6 @@
-import { ThemeContext } from "@/pages/_app";
-import Link from "next/link";
 import { useContext } from "react";
+import Link from "next/link";
+import { ThemeContext } from "@/pages/_app";
 
 export default function Navbar() {
   const {theme, toggleTheme} = useContext(ThemeContext)

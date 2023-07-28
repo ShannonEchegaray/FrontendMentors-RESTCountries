@@ -1,8 +1,12 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import Layout from "@/components/layout/home"
 import { createContext, useEffect, useState } from 'react'
 import Head from 'next/head'
+import type { AppProps } from 'next/app'
+
+// COMPONENTS
+import Layout from "@/components/layout/home"
+
+// STYLES
+import '@/styles/globals.css'
 
 export const ThemeContext = createContext<any>(null)
 

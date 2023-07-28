@@ -9,8 +9,8 @@ interface ICountry {
 export default function CountryCard({ country }: ICountry) {
   return (
     <Link
-      href={`/${country.name}`}
-      className="w-full min-h-[16rem]  rounded-lg justify-between align-middle"
+      href={`/country/?name=${country.name}`}
+      className="w-full max-w-[16rem] min-h-[16rem] rounded-lg justify-between align-middle"
     >
       <div className="flex flex-col shadow-md shadow-slate-900 overflow-hidden rounded-lg ">
         <div className="w-full h-32 border-b-2 overflow-hidden">
@@ -21,7 +21,7 @@ export default function CountryCard({ country }: ICountry) {
           />
         </div>
         <div className="p-4">
-          <p className="mb-3 font-bold">{country.name}</p>
+          <p className="mb-3 font-bold truncate">{country.name}</p>
           <p>
             <span className="font-medium">Population</span>:{" "}
             {new Intl.NumberFormat().format(country.population)}

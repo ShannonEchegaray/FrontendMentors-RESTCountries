@@ -3,6 +3,7 @@ import type { Welcome, Country } from "../types/interfaces";
 import { adaptCountries } from "@/utils/commons";
 import SearchBar from "@/components/search-bar/search-bar";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 const CountryCard = dynamic(
   () => import("@/components/country-card/country-card"),
   {
@@ -17,24 +18,27 @@ interface ICountries {
 
 export default function Countries({ countries }: ICountries) {
   return (
-    <div className="m-auto max-w-[1440px] py-5">
-      <SearchBar />
-      <div className="p-5 layout-countries gap-20">
-        {countries.map((el) => (
-          <CountryCard key={el.officialName} country={el}></CountryCard>
-        ))}
+    <>
+      <Head>
+        <meta name="description" content="All the countries of the world! Come to see." />
+        <title>RestCountries - Home</title>
+      </Head>
+      <div className="m-auto max-w-[1440px] py-5">
+        <SearchBar />
+        <div className="p-5 layout-countries gap-20">
+          {countries.map((el) => (
+            <CountryCard key={el.officialName} country={el}></CountryCard>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { page = 0, search = "", filter = "" } = context.query;
 
-  console.log("Hello world");
-
   let countries: Welcome[] | null | undefined;
-  console.log(countries);
 
   // Filtro por paises
   if (filter) {
@@ -46,8 +50,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       await fetch("https://restcountries.com/v3.1/all")
     ).json();
   }
-
-  console.log(countries);
 
   // Filtro por busqueda
   if (search) {

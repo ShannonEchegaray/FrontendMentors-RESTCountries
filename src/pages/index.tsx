@@ -1,9 +1,10 @@
 import { GetServerSideProps, GetStaticProps } from "next";
-import type { Welcome, Country } from "../types/interfaces";
+import type { InitFetch, Country } from "../types/interfaces";
 import { adaptCountries } from "@/utils/commons";
 import SearchBar from "@/components/search-bar/search-bar";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import useCountry from "@/hooks/useCountry";
 const CountryCard = dynamic(
   () => import("@/components/country-card/country-card"),
   {
@@ -12,11 +13,18 @@ const CountryCard = dynamic(
 );
 
 interface ICountries {
-  countries: Country[];
+  initCountries: InitFetch[];
   pages: number;
 }
 
-export default function Countries({ countries }: ICountries) {
+export default function Countries({ initCountries }: ICountries) {
+
+  const {showCountries: countries, numberOfPages, setSearch, setPage, actualPage} = useCountry(initCountries);
+
+  const handleChangePage = (page: number) => {
+    setPage(page);
+  }
+
   return (
     <>
       <Head>
@@ -25,11 +33,22 @@ export default function Countries({ countries }: ICountries) {
         <link rel="icon" href="/flag-icon.png"></link>
       </Head>
       <div className="m-auto max-w-[1440px] py-5">
-        <SearchBar />
+        <SearchBar onSearch={setSearch} />
         <div className="p-5 layout-countries gap-20">
           {countries.map((el) => (
             <CountryCard key={el.officialName} country={el}></CountryCard>
           ))}
+        </div>
+        <div className="py-5 flex justify-center gap-4">
+          {Array.from({length: 7}, (_, index) => 
+            actualPage - 2 + index > 0 
+          && actualPage - 2 + index < numberOfPages 
+          && (
+              <button onClick={() => handleChangePage(actualPage - 3 + index)} key={index}>
+                {actualPage - 2 + index}
+              </button>
+            )
+          )}
         </div>
       </div>
     </>
@@ -37,44 +56,16 @@ export default function Countries({ countries }: ICountries) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { page = 0, search = "", filter = "" } = context.query;
 
-  let countries: Welcome[] | null | undefined;
+  let countries: InitFetch[];
 
-  // Filtro por paises
-  if (filter) {
-    countries = await (
-      await fetch(`https://restcountries.com/v3.1/region/${filter}`)
-    ).json();
-  } else {
-    countries = await (
+  countries = await (
       await fetch("https://restcountries.com/v3.1/all")
-    ).json();
-  }
-
-  // Filtro por busqueda
-  if (search) {
-    countries = countries?.filter((country) => {
-      return country.name.common
-        .toLowerCase()
-        .includes((search as string).toLowerCase());
-    });
-  }
-
-  if (!countries) {
-    return {
-      props: {
-        countries: [],
-      },
-    };
-  }
-
-  // Paginacion
-  const sliced: Welcome[] = countries.slice(+page * 20, +page * 20 + 20);
-
+      ).json();
+  
   return {
     props: {
-      countries: adaptCountries(sliced),
-    },
-  };
+      initCountries: countries
+    }
+  }
 };

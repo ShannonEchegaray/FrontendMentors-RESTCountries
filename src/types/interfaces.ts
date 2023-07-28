@@ -19,7 +19,7 @@ interface Flag {
     png: string; 
 }
 
-export interface Welcome {
+export interface InitFetch {
     name:         Name;
     tld:          string[];
     cca2:         string;

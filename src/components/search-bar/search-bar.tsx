@@ -1,7 +1,13 @@
+import { SearchOptions } from "@/hooks/useCountry";
 import { useRouter } from "next/router";
-import { FormEvent, ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
+import options from "./options";
 
-export default function SearchBar() {
+interface SearchBarProps {
+  onSearch: (searchOptions: SearchOptions) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({onSearch}) => {
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const router = useRouter();
@@ -14,21 +20,22 @@ export default function SearchBar() {
     setSearch(event.target.value);
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      onSearch({
+        search,
+        filter
+      })
+    }, 300);
 
-    const URLParams = new URLSearchParams();
-
-    if (search.length > 0) URLParams.set("search", search);
-    if (filter.length > 0) URLParams.set("filter", filter);
-
-    router.push("/?" + URLParams.toString());
-  }
+    return () => clearTimeout(timeoutId);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search, filter])
 
   return (
     <form
       className="m-auto w-11/12 flex flex-col justify-between align-middle md:flex-row md:items-center"
-      onSubmit={handleSubmit}
+      onSubmit={(e) => e.preventDefault()}
     >
       <div className="w-fit md:w-1/4 my-4 flex align-middle justify-around rounded-lg shadow-sm shadow-black overflow-hidden">
         <svg
@@ -59,12 +66,14 @@ export default function SearchBar() {
         <option value="" hidden defaultValue="">
           Filter By Region
         </option>
-        {["Africa", "America", "Asia", "Europe", "Oceania"].map((region, i) => (
-          <option key={i} value={region.toLowerCase()}>
-            {region}
+        {options.map((option, i) => (
+          <option key={i} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>
     </form>
   );
 }
+
+export default SearchBar;

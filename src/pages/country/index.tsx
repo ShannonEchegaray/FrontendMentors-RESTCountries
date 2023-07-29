@@ -13,7 +13,6 @@ import type { Country, InitFetch } from "../../types/interfaces";
 // COMPONENTS
 import Tag from "@/components/tag/tag";
 
-
 interface ICountryDetail {
   country: Country | null;
 }
@@ -22,7 +21,7 @@ export default function CountryDetail({ country }: ICountryDetail) {
   const router: NextRouter = useRouter();
 
   const handlerBack = () => {
-    router.back();
+    router.push("/");
   };
 
   if (!country) return <p>Pagina no encontrada</p>;
@@ -31,7 +30,10 @@ export default function CountryDetail({ country }: ICountryDetail) {
     <>
       <Head>
         <title>RestCountries - {country.name}</title>
-        <meta name="description" content={`Let's give a look to ${country.name}.`} />
+        <meta
+          name="description"
+          content={`Let's give a look to ${country.name}.`}
+        />
         <link rel="icon" href={country.flag.png}></link>
       </Head>
       <div className="max-w-[1220px] m-auto p-8 flex flex-col gap-10">
@@ -120,16 +122,14 @@ export default function CountryDetail({ country }: ICountryDetail) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const {code, name} = context.query;
-  
-  try {
-    const url = Boolean(code) 
-      ? `https://restcountries.com/v3.1/alpha/${code}`
-      : `https://restcountries.com/v3.1/name/${name}`
+  const { code, name } = context.query;
 
-    const countries: InitFetch[] = await (
-      await fetch(url)
-    ).json();
+  try {
+    const url = Boolean(code)
+      ? `https://restcountries.com/v3.1/alpha/${code}`
+      : `https://restcountries.com/v3.1/name/${name}`;
+
+    const countries: InitFetch[] = await (await fetch(url)).json();
 
     return {
       props: {
